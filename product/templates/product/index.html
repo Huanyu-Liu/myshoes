@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include './components/header.html' %}
+</head>
+<body>
+    {% include './components/navbar.html' %}
+    <div class="container content-container">
+
+    <div class="page-header">
+        <h1>Nikidas Shoe
+        </h1>
+    </div>
+        <div>
+            {% load static %}
+        <img src="{% static 'product/images/carousel/1.jpg' %}">
+        </div>
+    <div class="page-header">
+        <h1>Men's Series</h1>
+    </div>
+    <div>
+        {% include './include/product_lib.html' with product=product_object%}
+{#        <?php#}
+{#        $conn = connectDB();#}
+{#        $sql = "SELECT * FROM product WHERE gender=0";#}
+{#        $result = $conn->query($sql);#}
+{#        if ($result->num_rows > 0) {#}
+{#            // output data of each row#}
+{#            while ($row = $result->fetch_assoc()) {#}
+{#                generateProductThumbnail($row);#}
+{#            }#}
+{#        }#}
+{#        $conn->close();#}
+{##}
+{#        ?>#}
+
+    </div>
+
+
+{#    <div class="page-header">#}
+{#        <h1>Women's Series</h1>#}
+{#    </div>#}
+{#    <div >#}
+{#        <?php#}
+{#        $conn = connectDB();#}
+{#        $sql = "SELECT * FROM product WHERE gender=1";#}
+{#        $result = $conn->query($sql);#}
+{#        if ($result->num_rows > 0) {#}
+{#            // output data of each row#}
+{#            while ($row = $result->fetch_assoc()) {#}
+{#                generateProductThumbnail($row);#}
+{#            }#}
+{#        }#}
+{#        $conn->close();#}
+{##}
+{#        ?>#}
+{##}
+{#    </div>#}
+
+
+</div>
+
+    {% include './components/footer.html' %}
+</body>
+</html>

@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+    {% include 'product/components/header.html' %}
+</head>
+<body>
+    {% include 'product/components/navbar.html' %}
+<div class="container content-container">
+
+    <div class="page-header">
+        <h1>
+            {{ product.name }}
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9">
+            <img src="{{ product.img.url }}">
+        </div>
+        <div class="col-md-3">
+            {% if user.is_authenticated %}
+            <form role="form" action="{% url 'product:buy' %}" method="post">
+
+                {% csrf_token %}
+            {% endif %}
+                <h1>$ {{ product.price }}</h1>
+
+                <p>{{ product.description }}</p>
+                <hr>
+                <h4>Choose your size:</h4>
+                <select class="form-control" name="size">
+
+                    {%  for i in range %}
+                        <option value={{ i }}>{{ i }}</option>
+                    {% endfor %}
+
+                </select>
+
+                <h4>Quantity:</h4>
+                <div class="form-group">
+                    <input type="number" class="form-control" id="quantity" name="quantity" value="1" placeholder="Enter Quantity">
+                </div>
+
+                <hr>
+
+                {% if user.is_authenticated %}
+                    <input type="hidden" name="product" value={{ product.id }}>
+                <p>
+                    <input type="submit" value="Buy Now">
+                </p>
+
+                    </form>
+                {% else %}
+                <p>
+                    <button><a href="{% url 'product:login' %}">Buy Now</a></button>
+                </p>
+                {% endif %}
+
+        </div>
+    </div>
+
+
+</div>
+
+<?php
+include './components/footer.php';
+?>
+</body>
+</html>

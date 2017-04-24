@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include './components/header.html' %}
+</head>
+<body>
+    {% include './components/navbar.html' %}
+<div class="container content-container">
+
+    <div class="page-header">
+        <h1 align="middle">Member Login<br>
+            <small>Enter username and password</small>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 well">
+
+            {% if login_fail %}
+                <div class="alert alert-warning" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    Invalid email or password, please try again
+                </div>
+            {% endif %}
+            <form role="form" method="post" action="{% url 'product:login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" name="username" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+{#                <div class="checkbox">#}
+{#                    <label>#}
+{#                        <input type="checkbox"> Remember me#}
+{#                    </label>#}
+{#                </div>#}
+                <button type="submit" class="btn btn-primary">Login </button>
+                <a href="{% url 'product:register' %}" class="pull-right"> Create a new account</a>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+{% include './components/footer.html' %}
+</body>
+</html>

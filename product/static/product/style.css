@@ -1,0 +1,28 @@
+img {
+    max-width: 100%;
+}
+
+.align-right {
+    text-align: right;
+}
+
+footer.jumbotron {
+    margin-top: 250px;
+	margin-bottom: 0px;
+}
+
+.content-container {
+    margin-top: 30px;
+}
+
+.product-thumbnail {
+    width: 100%;
+}
+.successful {
+    text-align: center;
+	margin-top: 225px;
+	margin-bottom: 25px;
+	font-size: 50;
+}
+.log{font-size: 16px;
+}
