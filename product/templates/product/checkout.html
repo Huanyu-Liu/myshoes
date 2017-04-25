@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    {% include './components/header.html' %}
+</head>
+<body>
+    {% include './components/navbar.html' %}
+<div class="container content-container">
+   <div class="page-header">
+        <h1>Order result</h1>
+    </div>
+ <div >
+
+
+  <p style="font-size: 40px">
+  You have successfully order your items.<br>
+  A confirmation mail has sent to you.
+{#<?php#}
+{#$email=getUserEmail();#}
+{#$to      = $email;#}
+{#$subject = 'the subject';#}
+{#$message = 'hello from php mail';#}
+{#$headers = 'From: instructor@localhost' . "\r\n" .#}
+{#    'Reply-To: instructor@localhost' . "\r\n" .#}
+{#    'X-Mailer: PHP/' . phpversion();#}
+{##}
+{#mail($to, $subject, $message, $headers,'-ff34s02@localhost');#}
+{#?>#}
+
+  </p>
+</div>
+
+</div>
+
+{% include './components/footer.html' %}
+</body>
+</html>
