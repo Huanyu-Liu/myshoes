@@ -16,9 +16,9 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4 well">
 
-            {% if login_fail %}
-                <div class="alert alert-warning" role="alert">
-                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+            {% if request.session.login_failed %}
+                <div class="alert alert-warning" id="alert">
+{#                    <span class="glyphicon glyphicon-exclamation-sign"></span>#}
                     Invalid email or password, please try again
                 </div>
             {% endif %}
@@ -47,5 +47,14 @@
 </div>
 
 {% include './components/footer.html' %}
+{#<script>#}
+{#    var a = "{{ request.session.login_fail }}";#}
+{#    var div = document.getElementById("alert");#}
+{#    function myFunction(){#}
+{#        if (a){#}
+{#            div.style.display = 'block'#}
+{#        }#}
+{#    }#}
+{#</script>#}
 </body>
 </html>

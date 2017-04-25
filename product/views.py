@@ -57,18 +57,25 @@ def login(request):
     print(user)
     if user is not None:
         auth.login(request, user)
+        request.session['login_failed'] = False
         return HttpResponseRedirect(reverse('product:index'))
     else:
 
-        return render(request, 'product/login.html',{'login_fail':True})
+        request.session['login_failed'] = True
+        return HttpResponseRedirect(reverse('product:login_page'))
 
 def logout(request):
     auth.logout(request)
+
     # Redirect to a success page.
     return HttpResponseRedirect(reverse('product:index'))
 
 def cart(request):
-    return render(request,'product/cart.html',{'items':Cart.objects.filter(user=request.user)})
+    items = Cart.objects.filter(user=request.user)
+    total_price = 0
+    for item in items:
+        total_price += item.product.price * item.count
+    return render(request,'product/cart.html',{'items':items, 'total_price':total_price})
 
 def show(request, product_id):
     product = get_object_or_404(Product,pk=product_id)
@@ -87,3 +94,19 @@ def buy(request):
     cart = Cart(count=count,size=size,user=user,product_id=product)
     cart.save()
     return HttpResponseRedirect(reverse('product:cart'))
+
+def delete(request,cart_id):
+    a = get_object_or_404(Cart,pk=cart_id)
+    a.delete()
+    return HttpResponseRedirect(reverse('product:cart'))
+def check_out(request):
+    items = Cart.objects.filter(user=request.user)
+    for item in items:
+        item.delete()
+    return render(request,'product/checkout.html')
+
+def login_page(request):
+    # request.session['login_failed'] =False
+    a = render(request,'product/login.html')
+    request.session['login_failed'] = False
+    return a

@@ -7,12 +7,15 @@ img {
 }
 
 footer.jumbotron {
-    margin-top: 250px;
 	margin-bottom: 0px;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
 }
 
 .content-container {
     margin-top: 30px;
+    padding-bottom: 300px;
 }
 
 .product-thumbnail {
@@ -26,3 +29,14 @@ footer.jumbotron {
 }
 .log{font-size: 16px;
 }
+body {
+    position: relative;
+    min-height: 100%;
+}
+html {
+    height: 100%;
+}
+div.hover-test:hover, div.hover-test:active{
+    cursor: hand;
+}
+

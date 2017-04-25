@@ -1,9 +1,38 @@
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     {% include 'product/components/header.html' %}
+    <style>
+        button {
+            border: none;
+            background: #3a7999;
+            color: #f2f2f2;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            position: relative;
+            box-sizing: border-box;
+            transition: all 500ms ease;
+
+        }
+        button:before {
+            content: '';
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 0px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            transition: all 2s ease;
+        }
+
+        button:hover:before {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-    {% include 'product/components/navbar.html' %}
+{% include 'product/components/navbar.html' %}
 <div class="container content-container">
 
     <div class="page-header">
@@ -18,42 +47,41 @@
         </div>
         <div class="col-md-3">
             {% if user.is_authenticated %}
-            <form role="form" action="{% url 'product:buy' %}" method="post">
+                <form role="form" action="{% url 'product:buy' %}" method="post">
 
                 {% csrf_token %}
             {% endif %}
-                <h1>$ {{ product.price }}</h1>
+            <h1>$ {{ product.price }}</h1>
 
-                <p>{{ product.description }}</p>
-                <hr>
-                <h4>Choose your size:</h4>
-                <select class="form-control" name="size">
+            <p>{{ product.description }}</p>
+            <hr>
+            <h4>Choose your size:</h4>
+            <select class="form-control" name="size">
 
-                    {%  for i in range %}
-                        <option value={{ i }}>{{ i }}</option>
-                    {% endfor %}
+                {% for i in range %}
+                    <option value={{ i }}>{{ i }}</option>
+                {% endfor %}
 
-                </select>
+            </select>
 
-                <h4>Quantity:</h4>
-                <div class="form-group">
-                    <input type="number" class="form-control" id="quantity" name="quantity" value="1" placeholder="Enter Quantity">
-                </div>
+            <h4>Quantity:</h4>
+            <div class="form-group">
+                <input type="number" min="1" class="form-control" id="quantity" name="quantity" value="1"
+                       placeholder="Enter Quantity">
+            </div>
 
-                <hr>
+            <hr>
 
-                {% if user.is_authenticated %}
-                    <input type="hidden" name="product" value={{ product.id }}>
-                <p>
-                    <input type="submit" value="Buy Now">
-                </p>
+            {% if user.is_authenticated %}
+                <input type="hidden" name="product" value={{ product.id }}>
+                <button type="submit">Buy Now</button>
 
-                    </form>
-                {% else %}
-                <p>
-                    <button><a href="{% url 'product:login' %}">Buy Now</a></button>
-                </p>
-                {% endif %}
+
+                </form>
+            {% else %}
+                    <button onclick="location.href='{% url "product:login_page" %}'">Buy Now</button>
+
+            {% endif %}
 
         </div>
     </div>
@@ -61,8 +89,6 @@
 
 </div>
 
-<?php
-include './components/footer.php';
-?>
+{% include './components/footer.html' %}
 </body>
 </html>

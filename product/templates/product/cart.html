@@ -48,27 +48,26 @@
     {% include 'product/components/header.html' %}
 </head>
 <body>
-    {% include 'product/components/navbar.html' %}
+{% include 'product/components/navbar.html' %}
 <div class="container content-container">
-   <div class="page-header">
+    <div class="page-header">
         <h1>Cart</h1>
     </div>
- <div >
-
-
+    <div>
         <h1>
             My Shopping Cart
         </h1>
     </div>
+    <div>
+        {% if not items %}
 
-    <div >
-        <div class="col-md-9">
-            {% if not items %}
             <a>No items added to cart yet</a>
-            {% else %}
+        {% else %}
+            <div class="col-md-9">
+                {% load mathfilters %}
                 <table class="table ">
                     <thead>
-                    <tr >
+                    <tr>
                         <td width="15%"></td>
                         <td width="30%">Product</td>
                         <td>Size</td>
@@ -86,47 +85,38 @@
                             <td>{{ item.size }}</td>
                             <td>${{ item.product.price }}</td>
                             <td>{{ item.count }}</td>
-                            </tr>
-{#                    <?php#}
-{#                    foreach ($items as $item) {#}
-{#                        echo "<tr>";#}
-{#                        echo "<td>";#}
-{#                        echo "<img src=>";#}
-{#                        echo "</td>";#}
-{#                        echo "<td>";#}
-{#                        echo "<h4>" . $item['product_name'] . "</h4>";#}
-{#                        echo "</td>";#}
-{#                        echo "<td>" . $item['size'] . "</td>";#}
-{#                        echo "<td>$ " . $item['price'] . "</td>";#}
-{#                        echo "<td>" . $item['quantity'] . "</td>";#}
-{#                        echo "<td>$ " . number_format($item['price'] * $item['quantity'], 2) . "</td>";#}
-{#                        echo "<td><a href='./cart.php?delete=" . $item['order_item_id'] . "'>delete</a></td>";#}
-{#                        echo "</tr>";#}
-{##}
-{#                        $grandTotal += $item['price'] * $item['quantity'];#}
-{#                    }#}
-{#                    ?>#}
-                        {% endfor %}
+                            <td>{{ item.product.price | mul:item.count }}</td>
+                            <td><a href="{% url 'product:delete' item.id %}">Delete</a></td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
 
 
-			 <div >
+            </div>
+            <div class="col-md-3 align-right">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Cart Summary</h2>
+                    </div>
+                    <div class="panel-body">
+                        <h4>Grand Total: $ {{ total_price }}</h4>
+                    </div>
+                    <div class="panel-footer">
+                        <a href="{% url 'product:check_out' %}" class="btn btn-primary">Check Out</a>
+                    </div>
+                </div>
 
-
-
-    <p></p>
-    <h2></h2>
+            </div>
+        {% endif %}
+        {#        <div>#}
+        {#                   <h2 >Cart Summary</h2>#}
+        {#                   <h4>Grand Total: $ <?php echo number_format($grandTotal, 2); ?></h4>#}
+        {#                   <a href="./successful.php">Check Out</a>#}
+        {#        </div>#}
 
     </div>
-        </div>
-{#        <div>#}
-{#                   <h2 >Cart Summary</h2>#}
-{#                   <h4>Grand Total: $ <?php echo number_format($grandTotal, 2); ?></h4>#}
-{#                   <a href="./successful.php">Check Out</a>#}
-{#        </div>#}
-    </div>
-    {% endif %}
+
 
 </div>
 
